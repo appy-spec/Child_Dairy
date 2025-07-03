@@ -15,25 +15,28 @@ You will also need to create a `.env` file for the backend with your own secrets
 ## 🖼️ Screenshots of projects
 
 ### Home Page  
-![Login Page](ScreenShorts/homePage.png)
+![Login Page](ScreenShorts/homepage.png)
 
-### Support Page  
-![Login Page](ScreenShorts/supportPage.png)
+### Gallery Page  
+![Login Page](ScreenShorts/galleryPage.png)
 
-### Product Page  
-![Login Page](ScreenShorts/productPage.png)
+### About Page  
+![Login Page](ScreenShorts/aboutPage.png)
 
-### Signup Page  
-![Login Page](ScreenShorts/signupPage.png)
+### Login Page  
+![Login Page](ScreenShorts/adminLoginPage.png)
 
-### Dashboard Page
-![Dashboard](ScreenShorts/dashboard.png)
+### Admin Dashboard Page
+![Dashboard](ScreenShorts/adminHomePage.png)
 
-### Holdings Page  
-![Holdings Page](ScreenShorts/holdingPage.png)
+### Profile Page  
+![Holdings Page](ScreenShorts/profileViewPage.png)
 
-### Orders Page  
-![Orders Page](ScreenShorts/orderPage.png)
+### Add Announcement Page  
+![Orders Page](ScreenShorts/teacherAddAnnouncement.png)
+
+### View Time-Table Page  
+![Orders Page](ScreenShorts/viewTimeTable.png)
 
 For more Screenshorts please visit ScreenShorts folder of the project
 
