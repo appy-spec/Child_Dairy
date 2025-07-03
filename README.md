@@ -33,10 +33,10 @@ You will also need to create a `.env` file for the backend with your own secrets
 ![Holdings Page](screenshorts/profileViewPage.png)
 
 ### Add Announcement Page  
-![Orders Page](ScreenShorts/teacherAddAnnouncement.png)
+![Orders Page](screenshorts/teacherAddAnnouncement.png)
 
 ### View Time-Table Page  
-![Orders Page](screenshorts/viewTimeTable.png)
+![Orders Page](screenshorts/viewTimeTablePage.png)
 
 For more Screenshorts please visit ScreenShorts folder of the project
 
