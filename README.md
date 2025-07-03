@@ -27,7 +27,7 @@ You will also need to create a `.env` file for the backend with your own secrets
 ![Login Page](screenshorts/adminLoginPage.png)
 
 ### Add Announcement Page  
-![Add Announcement Page](screenshorts/teacherAddAnnouncemet.png)
+![Add Announcement Page](screenshorts/teacherAddAnnouncemetPage.png)
 
 ### Admin Dashboard Page
 ![Dashboard](screenshorts/adminHomePage.png)
