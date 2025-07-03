@@ -1,6 +1,7 @@
 # Child_Dairy
-A full-stack Zerodha-inspired stock trading platform clone, built with **ReactJS + Vite** on the frontend and **Express.js** on the backend. It supports user **authentication (login/signup)** and includes several key features such as a dashboard, homepage, product page, holdings, and orders.
 
+ It is a full-stack web application developed to support the education of lower-class students. The platform features public and protected pages and supports role-based access for students, teachers, and admins. It allows teachers to manage educational content, students to view their tasks, and admins to oversee the system and verify user registrations.
+ 
 ## Set Instructions
 
 Before running the project, make sure you have the following installed:
@@ -49,24 +50,22 @@ For more Screenshorts please visit ScreenShorts folder of the project
 - **JWT** for authentication
 - **bcrypt** for password hashing
 - **MongoDB** (via Mongoose)
+- **NodeMailer** (via to send the mail or link)
 
-## ✨ Some Key Features are ----
+## 📌 Features
 
-### Public Pages
-- **Homepage** – Landing page introducing the platform
-- **Class Page** – Highlights classes and services
-- **Support Page** - Helpfull for getting the support
-- **About Page** - To know more about the developer
+- **Three Types of Logins**
+  - **Admin**: Manages the platform and approves users
+  - **Teacher**: Uploads tasks and manages student data
+  - **Student**: Views assigned tasks and interacts with content
 
-### Auth System
-- **Sign Up** – Create account with email & password
-- **Login** – Secure login with JWT stored in HTTP-only cookies
-- **Logout** – Clear session securely
+- **Authentication & Authorization**
+  - Role-based access
+  - Public and protected pages
+  - Admin verification for student and teacher registration
 
-### Authenticated User Pages
-- **Dashboard** – Overview after login (teacher, admin, student)
-- **Profile view** – helps to view the profile 
-- **Update Password** – View and manage page
-- **Registraction Page** - it will done by link provided by admin, teacher
+- **Content Management**
+  - Teachers can upload and manage assignments
+  - Students can access personalized dashboards
 
 
