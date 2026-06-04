@@ -8,8 +8,8 @@ module.exports.adminCheckCredentials = async () => {
 
     if (result.length == 0) {
       let userData = {
-        email: "admin@gmail.com",
-        password: await bcrypt.hash("12345678", 10),
+        email: process.env.ADMIN_EMAIL,
+        password: await bcrypt.hash(process.env.ADMIN_PASSWORD, 10),
       };
 
       let newUser = new AdminModel(userData);
