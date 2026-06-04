@@ -25,7 +25,7 @@ app.use(expressFileUpload());
 
 const mongoose=require("mongoose");
 
-mongoose.connect(process.env.URL)
+mongoose.connect(process.env.MONGO_URL)
 .then(() => console.log("mongoose connected successfully"));
 
 // set up of the route to listen the route
