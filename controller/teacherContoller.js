@@ -3,6 +3,7 @@ const jwt = require("jsonwebtoken");
 const uuid4 = require("uuid4");
 const mailer = require("../controller/mailer.js");
 const path = require("path");
+const fs = require("fs");
 
 const { message, status } = require("../utils/statusMessage");
 const TeacherModel = require("../model/teacherSchema");
@@ -20,10 +21,18 @@ module.exports.teacherRegistrationDataController = async (req, res) => {
   try {
     const filename = req.files.profile;
     const fileName = new Date().getTime() + filename.name;
+    // const pathName = path.join(
+    //   __dirname.replace("\\controller", "") +
+    //     "/public/teacherProfile/" +
+    //     fileName
+    // );
+
     const pathName = path.join(
-      __dirname.replace("\\controller", "") +
-        "/public/teacherProfile/" +
-        fileName
+      __dirname,
+      "..",
+      "public",
+      "teacherProfile",
+      fileName
     );
 
     filename.mv(pathName, async (error) => {
@@ -38,6 +47,20 @@ module.exports.teacherRegistrationDataController = async (req, res) => {
         req.body.password = await bcrypt.hash(req.body.password, 10);
         req.body.profile = fileName;
         const teacherData = req.body;
+        const existingTeacher = await TeacherModel.findOne({ email: teacherData.email });
+        if (existingTeacher) {
+          fs.unlink(pathName, (err) => {
+            if (err) {
+              console.log("Error deleting uploaded file:", err);
+            } else {
+              console.log("Uploaded file removed successfully");
+            }
+          });
+          return res.render("teacherLogin.ejs", {
+            message: "Email already exists, please login or use another email.",
+            status: status.ERROR,
+          });
+        }    
         const addTeacherData = new TeacherModel(teacherData);
         addTeacherData
           .save()
@@ -349,9 +372,16 @@ module.exports.addMealMenuController = async (req, res) => {
     const filename = req.files.menuDoc;
     const fileName = new Date().getTime() + filename.name;
     mealData.menuDoc = fileName;
+    // const pathName = path.join(
+    //   __dirname.replace("\\controller", ""),
+    //   "/public/mealMenu/" + fileName
+    // );
     const pathName = path.join(
-      __dirname.replace("\\controller", ""),
-      "/public/mealMenu/" + fileName
+      __dirname,
+      "..",
+      "public",
+      "mealMenu",
+      fileName
     );
     filename.mv(pathName, async (error) => {
       if (error) {
@@ -390,9 +420,16 @@ module.exports.addTimeTableController = async (req, res) => {
     const filename = req.files.timeTableDoc;
     const fileName = new Date().getTime() + filename.name;
     timeTableData.timeTableDoc = fileName;
+    // const pathName = path.join(
+    //   __dirname.replace("\\controller", ""),
+    //   "/public/timeTable/" + fileName
+    // );
     const pathName = path.join(
-      __dirname.replace("\\controller", ""),
-      "/public/timeTable/" + fileName
+      __dirname,
+      "..",
+      "public",
+      "timeTable",
+      fileName
     );
     filename.mv(pathName, async (error) => {
       if (error) {
@@ -431,9 +468,16 @@ module.exports.addAssignmentController = async (req, res) => {
     const filename = req.files.assignmentDoc;
     const fileName = new Date().getTime() + filename.name;
     assignmentData.assignmentDoc = fileName;
+    // const pathName = path.join(
+    //   __dirname.replace("\\controller", ""),
+    //   "/public/assignment/" + fileName
+    // );
     const pathName = path.join(
-      __dirname.replace("\\controller", ""),
-      "/public/assignment/" + fileName
+      __dirname,
+      "..",
+      "public",
+      "assignment",
+      fileName
     );
     filename.mv(pathName, async (error) => {
       if (error) {
