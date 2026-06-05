@@ -2,6 +2,7 @@ const path = require("path");
 const jwt = require("jsonwebtoken");
 const uuid4 = require("uuid4");
 const bcrypt = require("bcrypt");
+const fs = require("fs");
 //const expressFileUpload=require("express-fileupload");
 //const {fileURLToPath}= require("url");
 //const {mv} =require("url");
@@ -22,10 +23,18 @@ module.exports.addStudentController = async (req, res) => {
     // const __dirname=path.dirname(__filename);
 
     const fileName = new Date().getTime() + filename.name;
+    // const pathName = path.join(
+    //   __dirname.replace("\\controller", "") +
+    //     "/public/studentProfile/" +
+    //     fileName
+    // );
+
     const pathName = path.join(
-      __dirname.replace("\\controller", "") +
-        "/public/studentProfile/" +
-        fileName
+      __dirname,
+      "..",
+      "public",
+      "studentProfile",
+      fileName
     );
 
     filename.mv(pathName, async (error) => {
@@ -36,6 +45,21 @@ module.exports.addStudentController = async (req, res) => {
         req.body.studentId = uuid4();
         req.body.profile = fileName;
         req.body.password = await bcrypt.hash(req.body.password, 10);
+
+        const existingStudent = await StudentModel.findOne({ email: studentData.email });
+        if (existingStudent) {
+          fs.unlink(pathName, (err) => {
+            if (err) {
+              console.log("Error deleting uploaded file:", err);
+            } else {
+              console.log("Uploaded file removed successfully");
+            }
+          });
+          return res.render("studentLogin.ejs", {
+            message: "Email already exists, please login or use another email.",
+            status: status.ERROR,
+          });
+        }
         const result = await new StudentModel(studentData);
         result
           .save()
