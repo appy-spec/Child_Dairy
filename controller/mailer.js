@@ -70,7 +70,7 @@ const mailer = async function (email, status, callback) {
             : "teacher/teacherRegistration";
 
         const registrationLink =
-            `http://localhost:3000/${endPoint}?email=${encodeURIComponent(email)}`;
+            `${process.env.BASE_URL}/${endPoint}?email=${encodeURIComponent(email)}`;
 
         const sendSmtpEmail = new SibApiV3Sdk.SendSmtpEmail();
 
