@@ -84,7 +84,10 @@ const authorizeJwt = (req, res, next) => {
 
 router.get("/teacherRegistration", (req, res) => {
   try {
-    const email=req.body.email;
+    const { email } = jwt.verify(
+      req.query.token,
+      process.env.JWT_SECRET
+    );
     res.render("teacherRegistration.ejs",{email:email});
   } catch (error) {
     console.log("Error in providing registration form:", error);
