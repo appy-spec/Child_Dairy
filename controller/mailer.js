@@ -22,19 +22,9 @@
 //         html:`Hello ${email}, This is simply a registration link which is given below, you must need to click on the 
 //         below link to register yourself.
 //         <br><br>
-//        <a
-//         href="http://localhost:3000/student/studentRegistration?email=${encodeURIComponent(email)}"
-//         style="
-//             background:#2563eb;
-//             color:white;
-//             padding:10px 20px;
-//             text-decoration:none;
-//             border-radius:5px;
-//             display:inline-block;
-//         "
-//         >
-//         Click To Register
-//         </a>
+//         <form action='http://localhost:3000/${endPoint}' method='post'> 
+//         <input type='hidden' name='email' id='email' value='${email}'> 
+//         <button>Click To Register</button> </form>
 //         `
 //     }
 
@@ -55,12 +45,11 @@
 // module.exports={mailer:mailer};
 
 const SibApiV3Sdk = require("sib-api-v3-sdk");
-
+const jwt = require("jsonwebtoken");
 const defaultClient = SibApiV3Sdk.ApiClient.instance;
 
 const apiKey = defaultClient.authentications["api-key"];
 apiKey.apiKey = process.env.BREVO_API_KEY;
-
 const emailApi = new SibApiV3Sdk.TransactionalEmailsApi();
 
 const mailer = async function (email, status, callback) {
@@ -68,14 +57,20 @@ const mailer = async function (email, status, callback) {
         const endPoint = status
             ? "student/studentRegistration"
             : "teacher/teacherRegistration";
+        
+        const token = jwt.sign(
+            { email },
+            process.env.JWT_SECRET,
+            { expiresIn: "12h" }
+        );
 
         const registrationLink =
-            `${process.env.BASE_URL}/${endPoint}?email=${encodeURIComponent(email)}`;
+            `${process.env.BASE_URL}/${endPoint}?token=${token}`;
 
         const sendSmtpEmail = new SibApiV3Sdk.SendSmtpEmail();
 
         sendSmtpEmail.sender = {
-            email: process.env.USER_EMAIL,
+            email: process.env.USER_EMAIL, 
             name: "Registration Team"
         };
 
