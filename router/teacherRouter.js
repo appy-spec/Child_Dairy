@@ -82,7 +82,7 @@ const authorizeJwt = (req, res, next) => {
   }
 };
 
-router.post("/teacherRegistration", (req, res) => {
+router.get("/teacherRegistration", (req, res) => {
   try {
     const email=req.body.email;
     res.render("teacherRegistration.ejs",{email:email});
